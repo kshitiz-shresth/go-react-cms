@@ -84,7 +84,7 @@ function Service() {
   const draggedItem = (result) => {
     setServices(reOrder(services, result?.source?.index, result?.destination?.index));
     axios.post(`http://localhost:8080/service/drag/${result.draggableId}`,{
-      soureIndex:result?.source?.index,
+      sourceIndex:result?.source?.index,
       destinationIndex:result?.destination?.index
     }).then(res => {
       console.log('done')
