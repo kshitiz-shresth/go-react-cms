@@ -51,13 +51,7 @@ function FixedPlugin({
   return (
     <div className="fixed-plugin">
       <Dropdown>
-        <Dropdown.Toggle
-          id="dropdown-fixed-plugin"
-          variant=""
-          className="text-white border-0 opacity-100"
-        >
-          <i className="fas fa-cogs fa-2x mt-1"></i>
-        </Dropdown.Toggle>
+       
         <Dropdown.Menu>
           <li className="adjustments-line d-flex align-items-center justify-content-between">
             <p>Background Image</p>
