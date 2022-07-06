@@ -183,7 +183,6 @@ function Service() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th className="border-0">S/N</th>
                       <th className="border-0">Title</th>
                       <th className="border-0">Description</th>
                       <th className="text-right">Actions</th>
@@ -209,7 +208,6 @@ function Service() {
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
                                     >
-                                      <td>{item.id}</td>
                                       <td>{item.title}</td>
                                       <td>{item.description}</td>
                                       <td className="td-actions">
