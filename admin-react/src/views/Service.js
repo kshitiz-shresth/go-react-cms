@@ -82,13 +82,15 @@ function Service() {
     return result;
   };
   const draggedItem = (result) => {
-    setServices(reOrder(services, result?.source?.index, result?.destination?.index));
-    axios.post(`http://localhost:8080/service/drag/${result.draggableId}`,{
-      sourceIndex:result?.source?.index,
-      destinationIndex:result?.destination?.index
-    }).then(res => {
-      console.log('done')
-    })
+    if (result?.source?.index != result?.destination?.index) {
+      setServices(reOrder(services, result?.source?.index, result?.destination?.index));
+      axios.post(`http://localhost:8080/service/drag/${result.draggableId}`, {
+        sourceIndex: result?.source?.index,
+        destinationIndex: result?.destination?.index
+      }).then(res => {
+        console.log('done')
+      })
+    }
   }
   const fetchData = () => {
     axios.get('http://localhost:8080/services').then(res => {
@@ -171,7 +173,7 @@ function Service() {
                 </Card.Title>
 
               </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0" style={{ minHeight:"500px" }}>
+              <Card.Body className="table-full-width table-responsive px-0" style={{ minHeight: "500px" }}>
                 <table className="table">
                   <thead>
                     <tr>
