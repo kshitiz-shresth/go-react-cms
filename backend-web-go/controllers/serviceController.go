@@ -130,3 +130,17 @@ func UpdateServices(c *gin.Context) {
 	c.JSON(http.StatusOK, serviceToBeUpdated)
 	// c.String(http.StatusOK, c.Param("id"))
 }
+
+func DeleteService(c *gin.Context) {
+	// Get model if exist
+	db := c.MustGet("db").(*gorm.DB)
+	var service models.ServiceSection
+	if err := db.Where("id = ?", c.Param("id")).First(&service).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	db.Delete(&service)
+
+	c.JSON(http.StatusOK, gin.H{"data": true})
+}
