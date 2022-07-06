@@ -14,7 +14,7 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
@@ -33,5 +33,7 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 	r.GET("/services", controllers.GetAllServices)
 	r.PUT("/services/:id", controllers.UpdateServices)
 	r.POST("/service/drag/:id", controllers.DragService)
+	r.DELETE("/services/:id", controllers.DeleteService)
+
 	return r
 }
