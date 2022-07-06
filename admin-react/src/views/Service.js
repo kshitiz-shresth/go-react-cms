@@ -83,6 +83,12 @@ function Service() {
   };
   const draggedItem = (result) => {
     setServices(reOrder(services, result?.source?.index, result?.destination?.index));
+    axios.post(`http://localhost:8080/service/drag/${result.draggableId}`,{
+      soureIndex:result?.source?.index,
+      destinationIndex:result?.destination?.index
+    }).then(res => {
+      console.log('done')
+    })
   }
   const fetchData = () => {
     axios.get('http://localhost:8080/services').then(res => {
@@ -165,8 +171,8 @@ function Service() {
                 </Card.Title>
 
               </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table>
+              <Card.Body className="table-full-width table-responsive px-0" style={{ minHeight:"500px" }}>
+                <table className="table">
                   <thead>
                     <tr>
                       <th className="border-0">S/N</th>
@@ -232,7 +238,7 @@ function Service() {
                     </Droppable>
                   </DragDropContext>
 
-                </Table>
+                </table>
 
               </Card.Body>
             </Card>
