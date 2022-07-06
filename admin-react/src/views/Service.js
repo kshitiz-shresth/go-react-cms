@@ -88,7 +88,13 @@ function Service() {
         sourceIndex: result?.source?.index,
         destinationIndex: result?.destination?.index
       }).then(res => {
-        console.log('done')
+      })
+    }
+  }
+  const deleteService = (id)=>{
+    if(confirm('Are You Sure?')){
+      axios.delete(`http://localhost:8080/services/${id}`).then((res) => {
+        fetchData()
       })
     }
   }
@@ -219,6 +225,7 @@ function Service() {
                                           className="btn-simple btn-link p-1"
                                           type="button"
                                           variant="danger"
+                                          onClick={() => { deleteService(item.id) }}
                                         >
                                           <i className="fas fa-times"></i>
                                         </Button>
