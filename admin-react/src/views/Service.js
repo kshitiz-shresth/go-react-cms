@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // react-bootstrap components
 import {
@@ -14,18 +15,127 @@ import {
   Tooltip,
   Row,
   Col,
+  Modal,
+  Form,
 } from "react-bootstrap";
 
 function Service() {
   let [services, setServices] = useState([])
-  useEffect(() => {
+  const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [formType, setFormType] = useState("Add");
+  const [updateId, setUpdateId] = useState(null);
+  const [defaultTitle, setDefaultTitle] = useState(null);
+  const [defaultDescription, setDefaultDescription] = useState(null);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault()
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      const formData = new FormData(form)
+      const title = formData.get('title')
+      const description = formData.get('description')
+      if (formType === "Add") {
+        axios.post('http://localhost:8080/services', { title, description }).then((res) => {
+          fetchData()
+          handleClose()
+        })
+      } else if (formType === "Edit") {
+        axios.put(`http://localhost:8080/services/${updateId}`, { title, description }).then((res) => {
+          fetchData()
+          handleClose()
+        })
+      }
+
+    }
+    setValidated(true);
+  };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const createNew = () => {
+    handleShow()
+    setValidated(false)
+    setFormType('Add')
+    emptyForm()
+  }
+  const editForm = (item) => {
+    handleShow()
+    setValidated(false)
+    setFormType('Edit')
+    setUpdateId(item.id)
+    setDefaultTitle(item.title)
+    setDefaultDescription(item.description)
+  }
+  const emptyForm = () => {
+    setDefaultTitle('')
+    setDefaultDescription('')
+  }
+
+  const fetchData = () => {
     axios.get('http://localhost:8080/services').then(res => {
       setServices(res.data.data)
     })
-  },[])
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <Card>
+            <Card.Header>
+              <Card.Title as="h4">{formType} Service</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Row>
+                  <Col className="pr-1" md="11">
+                    <Form.Group>
+                      <label>Title</label>
+                      <Form.Control
+                        required
+                        type="text"
+                        name="title"
+                        defaultValue={defaultTitle}
+                      ></Form.Control>
+                      <Form.Control.Feedback type="invalid">
+                        Title is required.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md="12">
+                    <Form.Group>
+                      <label>Description</label>
+                      <Form.Control
+                        required
+                        cols="80"
+                        rows="4"
+                        as="textarea"
+                        name="description"
+                        defaultValue={defaultDescription}
+                      ></Form.Control>
+                      <Form.Control.Feedback type="invalid">
+                        Description is required.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Button variant="primary" type="submit" >
+                  Save Changes
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Modal.Body>
+      </Modal>
       <Container fluid>
         <Row>
           <Col md="12">
@@ -35,11 +145,11 @@ function Service() {
                   <Button
                     className="btn-fill"
                     variant="info"
-                    onClick={()=>{setServices(oldValue=>[{id:2,title:"hello",description:"New"},...oldValue])}}
+                    onClick={createNew}
                   >
                     <div className="d-flex align-items-center">
                       <i className="nc-icon nc-simple-add"></i>
-                      <p className="ml-3 mb-0 ">Create New</p>
+                      <p className="ml-3 mb-0 ">Add New Service</p>
                     </div>
                   </Button>
                 </Card.Title>
@@ -50,51 +160,70 @@ function Service() {
 
                   <thead>
                     <tr>
-                      <th className="border-0">ID</th>
+                      <th className="border-0">S/N</th>
                       <th className="border-0">Title</th>
                       <th className="border-0">Description</th>
                       <th className="text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {services.map(item => (
-                      <tr>
-                        <td>{item.id}</td>
-                        <td>{item.title}</td>
-                        <td>{item.description}</td>
-                        <td className="td-actions">
-                          <OverlayTrigger
-                            overlay={
-                              <Tooltip id="tooltip-537440761">
-                                Edit Task..
-                              </Tooltip>
-                            }
+                  <DragDropContext onDragEnd>
+                    <Droppable droppableId="droppable">
+                      {(provided, snapshot) => (
+                          <tbody
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
                           >
-                            <Button
-                              className="btn-simple btn-link p-1"
-                              type="button"
-                              variant="info"
-                            >
-                              <i className="fas fa-edit"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            overlay={
-                              <Tooltip id="tooltip-21130535">Remove..</Tooltip>
+                            {Object.values(services).map((item, index) => {
+                              return (
+                                <Draggable
+                                  key={item.id}
+                                  draggableId={item.id?.toString()}
+                                  index={item.id}
+                                >
+                                  {(provided, snapshot) => {
+                                    return (
+                                      <tr 
+                                      ref={provided.innerRef} 
+                                      {...provided.dragHandleProps} 
+                                      {...provided.dragHandleProps}
+                                      key={`${index}row`}>
+                                        <td>{index + 1}</td>
+                                        <td>{item.title}</td>
+                                        <td>{item.description}</td>
+                                        <td className="td-actions">
+
+                                          <Button
+                                            className="btn-simple btn-link p-1"
+                                            type="button"
+                                            variant="info"
+                                            onClick={() => { editForm(item) }}
+                                          >
+                                            <i className="fas fa-edit"></i>
+                                          </Button>
+                                          <Button
+                                            className="btn-simple btn-link p-1"
+                                            type="button"
+                                            variant="danger"
+                                          >
+                                            <i className="fas fa-times"></i>
+                                          </Button>
+                                        </td>
+                                        {provided.placeholder}
+                                      </tr>
+                                    )
+                                  }
+                                  }
+                                </Draggable>
+                              )
                             }
-                          >
-                            <Button
-                              className="btn-simple btn-link p-1"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                            )
+                            }
+                          </tbody>
+                        )
+                      }
+
+                    </Droppable>
+                  </DragDropContext>
                 </Table>
               </Card.Body>
             </Card>

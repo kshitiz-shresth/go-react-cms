@@ -9,6 +9,7 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
     "react": "18.2.0",
+    "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "2.4.0",
     "react-chartist": "0.14.4",
     "react-dom": "18.2.0",
@@ -36,6 +37,9 @@
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
+  },
+  "resolutions": {
+    "autoprefixer": "10.4.5"
   },
   "browserslist": {
     "production": [

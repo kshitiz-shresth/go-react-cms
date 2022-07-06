@@ -24,11 +24,11 @@ function Maps() {
       position: myLatlng,
       map: map,
       animation: google.maps.Animation.DROP,
-      title: "Light Bootstrap Dashboard PRO React!",
+      title: "Admin Dashboard PRO React!",
     });
 
     const contentString =
-      '<div class="info-window-content"><h2>Light Bootstrap Dashboard PRO React</h2>' +
+      '<div class="info-window-content"><h2>Admin Dashboard PRO React</h2>' +
       "<p>A premium Admin for React-Bootstrap, Bootstrap, React, and React Hooks.</p></div>";
 
     const infowindow = new google.maps.InfoWindow({

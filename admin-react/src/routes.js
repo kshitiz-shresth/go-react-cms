@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Light Bootstrap Dashboard React - v2.0.1
+* Admin Dashboard - v2.0.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
@@ -24,6 +24,7 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
 import Service from "views/Service";
+import ServiceCreate from "views/ServiceCreate";
 
 const dashboardRoutes = [
   {
@@ -45,7 +46,7 @@ const dashboardRoutes = [
     name: "Service",
     icon: "nc-icon nc-grid-45",
     component: Service,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/table",

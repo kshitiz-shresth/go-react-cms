@@ -29,37 +29,37 @@ function Typography() {
                 <div className="typography-line">
                   <h1>
                     <span>Header 1</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h1>
                 </div>
                 <div className="typography-line">
                   <h2>
                     <span>Header 2</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h2>
                 </div>
                 <div className="typography-line">
                   <h3>
                     <span>Header 3</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h3>
                 </div>
                 <div className="typography-line">
                   <h4>
                     <span>Header 4</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h4>
                 </div>
                 <div className="typography-line">
                   <h5>
                     <span>Header 5</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h5>
                 </div>
                 <div className="typography-line">
                   <h6>
                     <span>Header 6</span>
-                    The Life of Light Bootstrap Dashboard React
+                    The Life of Admin Dashboard
                   </h6>
                 </div>
                 <div className="typography-line">

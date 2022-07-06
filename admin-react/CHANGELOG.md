@@ -243,4 +243,4 @@ const localizer = momentLocalizer(moment);
 ### Original Release
 
 - Added React-Bootstrap as base framework
-- Added design from Light Bootstrap Dashboard by KS
+- Added design from Admin Dashboard by KS
