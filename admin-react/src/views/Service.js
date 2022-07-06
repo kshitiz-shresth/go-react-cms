@@ -74,6 +74,16 @@ function Service() {
     setDefaultDescription('')
   }
 
+  const reOrder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    console.log(result)
+    return result;
+  };
+  const draggedItem = (result) => {
+    setServices(reOrder(services, result?.source?.index, result?.destination?.index));
+  }
   const fetchData = () => {
     axios.get('http://localhost:8080/services').then(res => {
       setServices(res.data.data)
@@ -156,8 +166,7 @@ function Service() {
 
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped">
-
+                <Table>
                   <thead>
                     <tr>
                       <th className="border-0">S/N</th>
@@ -166,65 +175,65 @@ function Service() {
                       <th className="text-right">Actions</th>
                     </tr>
                   </thead>
-                  <DragDropContext onDragEnd>
-                    <Droppable droppableId="droppable">
+                  <DragDropContext onDragEnd={draggedItem}>
+                    <Droppable droppableId="dropId">
                       {(provided, snapshot) => (
-                          <tbody
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                          >
-                            {Object.values(services).map((item, index) => {
-                              return (
-                                <Draggable
-                                  key={item.id}
-                                  draggableId={item.id?.toString()}
-                                  index={item.id}
-                                >
-                                  {(provided, snapshot) => {
-                                    return (
-                                      <tr 
-                                      ref={provided.innerRef} 
-                                      {...provided.dragHandleProps} 
+                        <tbody
+                          ref={provided.innerRef}
+                        >
+                          {Object.values(services).map((item, index) => {
+                            return (
+                              <Draggable
+                                draggableId={item?.id?.toString()}
+                                key={item?.id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <tr
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
                                       {...provided.dragHandleProps}
-                                      key={`${index}row`}>
-                                        <td>{index + 1}</td>
-                                        <td>{item.title}</td>
-                                        <td>{item.description}</td>
-                                        <td className="td-actions">
-
-                                          <Button
-                                            className="btn-simple btn-link p-1"
-                                            type="button"
-                                            variant="info"
-                                            onClick={() => { editForm(item) }}
-                                          >
-                                            <i className="fas fa-edit"></i>
-                                          </Button>
-                                          <Button
-                                            className="btn-simple btn-link p-1"
-                                            type="button"
-                                            variant="danger"
-                                          >
-                                            <i className="fas fa-times"></i>
-                                          </Button>
-                                        </td>
-                                        {provided.placeholder}
-                                      </tr>
-                                    )
-                                  }
-                                  }
-                                </Draggable>
-                              )
-                            }
+                                    >
+                                      <td>{item.id}</td>
+                                      <td>{item.title}</td>
+                                      <td>{item.description}</td>
+                                      <td className="td-actions">
+                                        <Button
+                                          className="btn-simple btn-link p-1"
+                                          type="button"
+                                          variant="info"
+                                          onClick={() => { editForm(item) }}
+                                        >
+                                          <i className="fas fa-edit"></i>
+                                        </Button>
+                                        <Button
+                                          className="btn-simple btn-link p-1"
+                                          type="button"
+                                          variant="danger"
+                                        >
+                                          <i className="fas fa-times"></i>
+                                        </Button>
+                                      </td>
+                                      {provided.placeholder}
+                                    </tr>
+                                  )
+                                }
+                                }
+                              </Draggable>
                             )
-                            }
-                          </tbody>
-                        )
+                          }
+                          )
+                          }
+                        </tbody>
+                      )
                       }
 
                     </Droppable>
                   </DragDropContext>
+
                 </Table>
+
               </Card.Body>
             </Card>
           </Col>
