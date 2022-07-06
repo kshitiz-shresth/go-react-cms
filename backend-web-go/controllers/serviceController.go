@@ -71,8 +71,7 @@ func DragService(c *gin.Context) {
 		currentOrder = (nextIssueOrder + previousIssueOrder) / 2
 	}
 
-	serviceToBeUpdated.Order = int16(currentOrder)
-	db.Model(&serviceToBeUpdated).Updates(serviceToBeUpdated)
+	db.Model(&serviceToBeUpdated).Updates(map[string]interface{}{"order": int16(currentOrder)})
 
 	c.JSON(http.StatusOK, gin.H{
 		"data":    serviceToBeUpdated,
