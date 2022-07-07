@@ -23,6 +23,9 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 
 		c.Next()
 	})
+	r.Static("/assets", "./public/assets")
+	r.LoadHTMLGlob("./public/*.html")
+	r.GET("/", controllers.Index)
 	r.GET("/tasks", controllers.FindTasks)
 	r.POST("/tasks", controllers.CreateTask)
 	r.GET("/tasks/:id", controllers.FindTask)
