@@ -8,10 +8,8 @@ import (
 func main() {
 
 	db := models.SetupDB()
-	db.AutoMigrate(&models.Task{}, &models.ServiceSection{})
+	db.AutoMigrate(&models.BasicDetail{}, &models.ServiceSection{})
 
 	r := routes.SetupRoutes(db)
 	r.Run()
 }
-
-
