@@ -82,6 +82,7 @@ function Service() {
     return result;
   };
   const draggedItem = (result) => {
+    if(result.destination===null) return
     if (result?.source?.index != result?.destination?.index) {
       setServices(reOrder(services, result?.source?.index, result?.destination?.index));
       axios.post(`http://localhost:8080/service/drag/${result.draggableId}`, {
