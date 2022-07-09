@@ -86,3 +86,15 @@ func SaveBasicDetail(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Success!"})
 }
+
+func GetBasicDetail(c *gin.Context) {
+	var basicDetail models.BasicDetail
+	db := c.MustGet("db").(*gorm.DB)
+	if !db.Where("id = ?", 1).First(&basicDetail).RecordNotFound() {
+		c.JSON(http.StatusOK, gin.H{"data": basicDetail, "message": "Fetched Successfully"})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{"data": basicDetail, "message": "Not Found"})
+		return
+	}
+}
