@@ -38,5 +38,7 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 	r.POST("/service/drag/:id", controllers.DragService)
 	r.DELETE("/services/:id", controllers.DeleteService)
 
+	r.POST("/basic-details", controllers.SaveBasicDetail)
+
 	return r
 }
