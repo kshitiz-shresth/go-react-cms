@@ -9,6 +9,7 @@ import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
 import Service from "views/Service";
 import ServiceCreate from "views/ServiceCreate";
+import Homepage from "views/Homepage";
 
 const dashboardRoutes = [
   {
@@ -23,6 +24,13 @@ const dashboardRoutes = [
     name: "User Profile",
     icon: "nc-icon nc-circle-09",
     component: UserProfile,
+    layout: "/admin"
+  },
+  {
+    path: "/homepage",
+    name: "Homepage",
+    icon: "nc-icon nc-bank",
+    component: Homepage,
     layout: "/admin"
   },
   {
