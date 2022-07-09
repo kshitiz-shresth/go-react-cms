@@ -24,6 +24,7 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 		c.Next()
 	})
 	r.Static("/assets", "./public/assets")
+	r.Static("/uploaded", "./public/uploaded")
 	r.LoadHTMLGlob("./public/*.html")
 	r.GET("/", controllers.Index)
 	r.GET("/tasks", controllers.FindTasks)
@@ -39,6 +40,7 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 	r.DELETE("/services/:id", controllers.DeleteService)
 
 	r.POST("/basic-details", controllers.SaveBasicDetail)
+	r.GET("/basic-details", controllers.GetBasicDetail)
 
 	return r
 }
