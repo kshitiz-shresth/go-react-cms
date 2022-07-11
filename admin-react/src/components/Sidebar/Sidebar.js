@@ -12,12 +12,9 @@ function Sidebar({ color, image, routes }) {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   return (
-    <div className="sidebar" data-image={image} data-color={color}>
+    <div className="sidebar" data-color="black">
       <div
         className="sidebar-background"
-        style={{
-          backgroundImage: "url(" + image + ")"
-        }}
       />
       <div className="sidebar-wrapper">
         <div className="logo d-flex align-items-center justify-content-start">
