@@ -81,7 +81,7 @@ function Homepage() {
           <Col md="12">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Edit Profile</Card.Title>
+                <Card.Title as="h4">Edit Homepage</Card.Title>
               </Card.Header>
               <Card.Body>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
