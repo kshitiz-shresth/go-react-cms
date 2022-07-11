@@ -41,7 +41,7 @@ function Homepage() {
       setDetails(res.data.data)
     })
   }
-  function imageExists(image_url){
+  function imageExists(image_url) {
 
     var http = new XMLHttpRequest();
 
@@ -86,48 +86,84 @@ function Homepage() {
               <Card.Body>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row>
-                    <Col className="pr-1" md="6">
-                      {imageExists(`http://localhost:8080/uploaded/${details.logo_image}`) ? (<Image height={"150px"} src={`http://localhost:8080/uploaded/${details.logo_image}`} />) : ""}
+                    <Col className="pr-1" md="4">
+                      {imageExists(`http://localhost:8080/uploaded/${details.logo_image}`) ? (<Image style={{ width: "200px" }} src={`http://localhost:8080/uploaded/${details.logo_image}`} />) : ""}
                       <Form.Group>
                         <label>Logo</label>
                         <Form.Control
                           name="logo_image"
                           type="file"
-                          accept="image/png, image/jpeg"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="pr-1" md="4">
+                      {imageExists(`http://localhost:8080/uploaded/${details.scala_image}`) ? (<Image style={{ width: "200px" }} src={`http://localhost:8080/uploaded/${details.scala_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Scala Logo</label>
+                        <Form.Control
+                          name="scala_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="pr-1" md="4">
+                      {imageExists(`http://localhost:8080/uploaded/${details.jpx_image}`) ? (<Image style={{ height: "35px" }} src={`http://localhost:8080/uploaded/${details.jpx_image}`} />) : ""}
+                      <Form.Group>
+                        <label>JPX Logo</label>
+                        <Form.Control
+                          name="jpx_image"
+                          type="file"
                         ></Form.Control>
                       </Form.Group>
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
+                    <Col className="pr-1" md="12">
+                      {imageExists(`http://localhost:8080/uploaded/${details.banner_image}`) ? (<Image style={{ height: "100px" }} src={`http://localhost:8080/uploaded/${details.banner_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Banner Image</label>
+                        <Form.Control
+                          name="banner_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="pr-1" md="4">
                       <Form.Group>
                         <label>Top First</label>
                         <Form.Control
                           defaultValue={details.top_first}
                           name="top_first"
-                          type="text"
+                          cols="80"
+                          rows="4"
+                          as="textarea"
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col className="pr-1" md="6">
+                    <Col className="pr-1" md="4">
                       <Form.Group>
                         <label>Top Second</label>
                         <Form.Control
-                          type="text"
+                          cols="80"
+                          rows="4"
+                          as="textarea"
                           defaultValue={details.top_second}
                           name="top_second"
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="6">
+                
+                    <Col className="pr-1" md="4">
                       <Form.Group>
                         <label>Top Third</label>
                         <Form.Control
                           defaultValue={details.top_third}
                           name="top_third"
-                          type="text"
+                          cols="80"
+                          rows="4"
+                          as="textarea"
                           required
                         ></Form.Control>
                       </Form.Group>
