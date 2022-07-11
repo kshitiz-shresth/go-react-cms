@@ -17,19 +17,19 @@ import {
 import ReactNotificationAlert from "react-notification-alert";
 
 function Homepage() {
-  const [details,setDetails] = useState({})
+  const [details, setDetails] = useState({})
   const [validated, setValidated] = useState(false);
   const notificationAlertRef = React.useRef(null);
 
-  const handleSubmit = (event)=>{
+  const handleSubmit = (event) => {
     const form = event.currentTarget
     event.preventDefault()
-    if(form.checkValidity()==false){
+    if (form.checkValidity() == false) {
       event.preventDefault();
       event.stopPropagation();
-    }else{
+    } else {
       const formData = new FormData(form)
-      axios.post('http://localhost:8080/basic-details',formData).then(res => {
+      axios.post('http://localhost:8080/basic-details', formData).then(res => {
         form.reset()
         fetchData()
         alert()
@@ -41,8 +41,18 @@ function Homepage() {
       setDetails(res.data.data)
     })
   }
+  function imageExists(image_url){
 
-  const alert = ()=>{
+    var http = new XMLHttpRequest();
+
+    http.open('HEAD', image_url, false);
+    http.send();
+
+    return http.status != 404;
+
+  }
+
+  const alert = () => {
     var options = {};
     options = {
       place: "br",
@@ -63,7 +73,7 @@ function Homepage() {
   }, [])
   return (
     <>
-     <div className="rna-container">
+      <div className="rna-container">
         <ReactNotificationAlert ref={notificationAlertRef} />
       </div>
       <Container fluid>
@@ -75,6 +85,19 @@ function Homepage() {
               </Card.Header>
               <Card.Body>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Row>
+                    <Col className="pr-1" md="6">
+                      {imageExists(`http://localhost:8080/uploaded/${details.logo_image}`) ? (<Image height={"150px"} src={`http://localhost:8080/uploaded/${details.logo_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Logo</label>
+                        <Form.Control
+                          name="logo_image"
+                          type="file"
+                          accept="image/png, image/jpeg"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
                   <Row>
                     <Col className="pr-1" md="6">
                       <Form.Group>
@@ -109,17 +132,7 @@ function Homepage() {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col className="pr-1" md="6">
-                      <Image  height={"150px"} src={`http://localhost:8080/uploaded/${details.logo_image}`} />
-                      <Form.Group>
-                        <label>Top Third</label>
-                        <Form.Control
-                          name="logo_image"
-                          type="file"
-                          accept="image/png, image/jpeg"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
+
                   </Row>
                   <Button
                     className="btn-fill pull-right"
