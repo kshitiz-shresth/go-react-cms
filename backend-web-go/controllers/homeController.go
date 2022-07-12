@@ -10,10 +10,13 @@ import (
 
 func Index(c *gin.Context) {
 	var services []models.ServiceSection
+	var basicDetail models.BasicDetail
 	db := c.MustGet("db").(*gorm.DB)
+	db.Where("id = ?", 1).First(&basicDetail)
 	db.Order("`order` asc").Find(&services)
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title":    "Ready To Work",
-		"services": services,
+		"title":       "Ready To Work",
+		"services":    services,
+		"basicDetail": basicDetail,
 	})
 }

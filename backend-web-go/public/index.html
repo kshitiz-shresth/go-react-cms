@@ -25,8 +25,8 @@
 <body>
     <div class="container-fluid banner__block">
         <picture>
-            <source media="(max-width: 700px)" srcset="img/lead_sp.jpg">
-            <img id="banner-image" src="/assets/img/lead43a0.jpg?v3" alt="process">
+            <source media="(max-width: 700px)" srcset="/uploaded/{{ .basicDetail.BannerImage }}">
+            <img id="banner-image" src="/uploaded/{{ .basicDetail.BannerImage }}" alt="process">
         </picture>
     </div>
     <div class="wrap" id="開発プロセスの特徴">
@@ -41,24 +41,20 @@
                     </div>
                     <div class="col-lg-12 service__list">
                         <div class="title-section">
-                            自社サービスの開発経験を活かし、クライアント様に寄り添い、<br/>サービス開発していきます。
+                            {{ .basicDetail.TopFirst }}
                         </div>
 
                         <div class="title-section-mobile">
-                            自社サービスの開発経験を活かし、<br/>クライアント様に寄り添い、<br/>サービス開発していきます。
+                            {{ .basicDetail.TopFirst }}
                         </div>
 
-                        <div class="subtitle-section">創業以来、スタートアップから、中小企業、大手企業、<br/>自治体様まで幅広い開発実績がございます。</div>
+                        <div class="subtitle-section">{{ .basicDetail.TopSecond }}</div>
 
-                        <div class="subtitle-section-mobile">創業以来、スタートアップから、<br />中小企業、大手企業、<br/>自治体様まで幅広い開発実績がございます。</div>
+                        <div class="subtitle-section-mobile">{{ .basicDetail.TopSecond }}</div>
 
-                        <div class="content-section">プロダクトがしっかりとユーザーに利用されるように設計、開発することを大事にしています。<br/>
-                            私たちには要件定義から、デザイン、開発まで対応できる体制があります。<br/>
-                            クライアント様に寄り添って、実現したいサービス、プロダクトを共に創っていきます。</div>
+                        <div class="content-section">{{ .basicDetail.TopThird }}</div>
 
-                        <div class="content-section-mobile">プロダクトがしっかりとユーザーに利用されるように<br />設計、開発することを大事にしています。<br/>
-                            私たちには要件定義から、デザイン、開発まで<br/>対応できる体制があります。<br/>
-                            クライアント様に寄り添って、実現したいサービス、<br/>プロダクトを共に創っていきます。</div>
+                        <div class="content-section-mobile">{{ .basicDetail.TopThird }}</div>
 
                         <div class="bg-abs-text"><p>readytowork</p></div>
                     </div>
@@ -90,7 +86,7 @@
             <h2>上流工程から下流まで対応できる開発チーム</h2>
             <p>事業に必要な要件定義から開発、保守運用まで対応可能</p>
         </div>
-        <img src="/assets/img/dev-system.jpg" alt="development system" width="844" height="511" />
+        <img src="/uploaded/{{ .basicDetail.DevSystemImage }}" alt="development system" width="844" height="511" />
     </div>
 
 
@@ -367,7 +363,7 @@
     </div>
 
     <footer>
-        <img src="/assets/img/logo.svg" class="footer__logo" alt="ReadyToWork" style="margin-left: 10px; margin-right: 10px"> |
+        <img src="/uploaded/{{ .basicDetail.LogoImage }}" class="footer__logo" alt="ReadyToWork" style="margin-left: 10px; margin-right: 10px"> |
         <a href="https://scalagrp.jp/" target="_blank"><img src="/assets/img/scala_logo.svg" alt="Scala Group" class="footer__logo_scala"> <img class="footer__logo_jpx" src="/assets/img/jpx.png" alt="東京証券取引所市場第一部に上場" /></a>
         <span style="margin-bottom: 10px">
             Copyright © 2021 readytowork
@@ -378,9 +374,9 @@
     <div class="container">
         <nav class="navbar__wrap">
             <div class="navbar__brand">
-                <img class="navbar__logo" src="/assets/img/logo.svg" alt="ReadyToWork" /> |
-              <a href="https://scalagrp.jp/" target="_blank"><img class="navbar__logo_scala" src="/assets/img/scala_logo.svg" alt="Scala Group" />
-              <img class="navbar__logo_jpx" src="/assets/img/jpx.png" alt="東京証券取引所市場第一部に上場" /></a>
+                <img class="navbar__logo" src="/uploaded/{{ .basicDetail.LogoImage }}" alt="ReadyToWork" /> |
+              <a href="https://scalagrp.jp/" target="_blank"><img class="navbar__logo_scala" src="/uploaded/{{ .basicDetail.ScalaImage }}" alt="Scala Group" />
+              <img class="navbar__logo_jpx" src="/uploaded/{{ .basicDetail.JpxImage }}" alt="東京証券取引所市場第一部に上場" /></a>
             </div>
             <div class="navbar__navitems">
                 <ul class="navbar__nav">
