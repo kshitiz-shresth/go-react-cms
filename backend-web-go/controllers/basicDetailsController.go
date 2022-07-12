@@ -65,16 +65,64 @@ func SaveBasicDetail(c *gin.Context) {
 	basicDetail.TopSecond = c.Request.FormValue("top_second")
 	basicDetail.TopThird = c.Request.FormValue("top_third")
 
-	//dev_sytem_image
-	dev_sytem_image, err := c.FormFile("dev_sytem_image")
+	//dev_system_image
+	dev_system_image, err := c.FormFile("dev_system_image")
 	if err == nil {
-		extension := filepath.Ext(dev_sytem_image.Filename)
+		extension := filepath.Ext(dev_system_image.Filename)
 		fileName := uuid.New().String() + extension
-		if err := c.SaveUploadedFile(dev_sytem_image, "./public/uploaded/"+fileName); err != nil {
+		if err := c.SaveUploadedFile(dev_system_image, "./public/uploaded/"+fileName); err != nil {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
 		basicDetail.DevSystemImage = fileName
+	}
+
+	//cases_image
+	cases_image, err := c.FormFile("cases_image")
+	if err == nil {
+		extension := filepath.Ext(cases_image.Filename)
+		fileName := uuid.New().String() + extension
+		if err := c.SaveUploadedFile(cases_image, "./public/uploaded/"+fileName); err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
+		}
+		basicDetail.CasesImage = fileName
+	}
+
+	//team_image
+	team_image, err := c.FormFile("team_image")
+	if err == nil {
+		extension := filepath.Ext(team_image.Filename)
+		fileName := uuid.New().String() + extension
+		if err := c.SaveUploadedFile(team_image, "./public/uploaded/"+fileName); err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
+		}
+		basicDetail.TeamImage = fileName
+	}
+
+	//flow_diagram_image
+	flow_diagram_image, err := c.FormFile("flow_diagram_image")
+	if err == nil {
+		extension := filepath.Ext(flow_diagram_image.Filename)
+		fileName := uuid.New().String() + extension
+		if err := c.SaveUploadedFile(flow_diagram_image, "./public/uploaded/"+fileName); err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
+		}
+		basicDetail.FlowDiagramImage = fileName
+	}
+
+	//steps_image
+	steps_image, err := c.FormFile("steps_image")
+	if err == nil {
+		extension := filepath.Ext(steps_image.Filename)
+		fileName := uuid.New().String() + extension
+		if err := c.SaveUploadedFile(steps_image, "./public/uploaded/"+fileName); err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
+		}
+		basicDetail.StepsImage = fileName
 	}
 
 	var checkExistBasic models.BasicDetail
