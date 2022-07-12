@@ -113,12 +113,12 @@ func SaveBasicDetail(c *gin.Context) {
 		basicDetail.FlowDiagramImage = fileName
 	}
 
-	//steps_image
-	steps_image, err := c.FormFile("steps_image")
+	//step_image
+	step_image, err := c.FormFile("step_image")
 	if err == nil {
-		extension := filepath.Ext(steps_image.Filename)
+		extension := filepath.Ext(step_image.Filename)
 		fileName := uuid.New().String() + extension
-		if err := c.SaveUploadedFile(steps_image, "./public/uploaded/"+fileName); err != nil {
+		if err := c.SaveUploadedFile(step_image, "./public/uploaded/"+fileName); err != nil {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
