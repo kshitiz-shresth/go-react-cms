@@ -154,7 +154,7 @@ function Homepage() {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                
+
                     <Col className="pr-1" md="4">
                       <Form.Group>
                         <label>Top Third</label>
@@ -170,6 +170,65 @@ function Homepage() {
                     </Col>
 
                   </Row>
+                  <Row>
+                    <Col className="pr-1" md="12">
+                      {imageExists(`http://localhost:8080/uploaded/${details.dev_system_image}`) ? (<Image style={{ height: "100px" }} src={`http://localhost:8080/uploaded/${details.dev_system_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Dev System Image</label>
+                        <Form.Control
+                          name="dev_system_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="pr-1" md="12">
+                      {imageExists(`http://localhost:8080/uploaded/${details.cases_image}`) ? (<Image style={{ height: "100px", background: "#001665" }} src={`http://localhost:8080/uploaded/${details.cases_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Cases Image</label>
+                        <Form.Control
+                          name="cases_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="pr-1" md="6">
+                      {imageExists(`http://localhost:8080/uploaded/${details.team_image}`) ? (<Image style={{ height: "100px", background: "#001665" }} src={`http://localhost:8080/uploaded/${details.team_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Team Image</label>
+                        <Form.Control
+                          name="team_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="pr-1" md="6">
+                      {imageExists(`http://localhost:8080/uploaded/${details.flow_diagram_image}`) ? (<Image style={{ height: "100px", background: "#001665" }} src={`http://localhost:8080/uploaded/${details.flow_diagram_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Flow Diagram Image</label>
+                        <Form.Control
+                          name="flow_diagram_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="pr-1" md="12">
+                      {imageExists(`http://localhost:8080/uploaded/${details.step_image}`) ? (<Image style={{ height: "100px", background: "#001665" }} src={`http://localhost:8080/uploaded/${details.step_image}`} />) : ""}
+                      <Form.Group>
+                        <label>Steps Image</label>
+                        <Form.Control
+                          name="step_image"
+                          type="file"
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
                   <Button
                     className="btn-fill pull-right"
                     type="submit"
