@@ -27,17 +27,18 @@ func SetupRoutes(db *gorm.DB) *gin.Engine {
 	r.Static("/uploaded", "./public/uploaded")
 	r.LoadHTMLGlob("./public/*.html")
 	r.GET("/", controllers.Index)
-	r.GET("/tasks", controllers.FindTasks)
-	r.POST("/tasks", controllers.CreateTask)
-	r.GET("/tasks/:id", controllers.FindTask)
-	r.PATCH("/tasks/:id", controllers.UpdateTask)
-	r.DELETE("tasks/:id", controllers.DeleteTask)
 
 	r.POST("/services", controllers.CreateService)
 	r.GET("/services", controllers.GetAllServices)
 	r.PUT("/services/:id", controllers.UpdateServices)
 	r.POST("/service/drag/:id", controllers.DragService)
 	r.DELETE("/services/:id", controllers.DeleteService)
+
+	r.POST("/providers", controllers.CreateProvider)
+	r.GET("/providers", controllers.GetAllProviders)
+	r.PUT("/providers/:id", controllers.UpdateProviders)
+	r.POST("/provider/drag/:id", controllers.DragProvider)
+	r.DELETE("/providers/:id", controllers.DeleteProvider)
 
 	r.POST("/basic-details", controllers.SaveBasicDetail)
 	r.GET("/basic-details", controllers.GetBasicDetail)
