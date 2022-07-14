@@ -164,7 +164,6 @@ function Homepage() {
                           cols="80"
                           rows="4"
                           as="textarea"
-                          required
                         ></Form.Control>
                       </Form.Group>
                     </Col>
