@@ -11,7 +11,7 @@ This repository is for practicing react and golanguage with gin framework. This 
 ## Frontend React Setup Steps:
 - goto `admin-react` if you are not there yet. `cd admin-react` from the root of this project
 - run `yarn install` or `npm install` or any other package manager you are comfortable in
-- after that just run `yarn start` ( you will be redirected in browser running localhost with port 3000 )
+- after that just run `yarn start` or `npm run start` ( you will be redirected in browser running localhost with port 3000 )
 - after few second you will have an access to manage your content.
 
 To see your changes you have done from react form you will need to browse http://localhost:8080
