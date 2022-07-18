@@ -1,5 +1,5 @@
 # GO REACT CMS (RTW Website Content Management System)
-This repository is for practicing react and golanguage with gin framework. This Project is all about managing content of website, i.e, converting static website to dynamic. For a reference i took the readytowork website https://readytowork.jp to make content dynamic. It was good learning and research.
+This repository is for practicing react and golang with gin framework. This Project is all about managing content of website, i.e, converting static website to dynamic. For a reference, I took a readytowork website https://readytowork.jp to make it's content dynamic. It was good learning and research.
 
 ## Backend Setup Steps:
 - goto `backend-web-go` if you are not there yet. `cd backend-web-go` from the root of this project.
